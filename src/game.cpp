@@ -14,7 +14,7 @@ void Game::readInput() {
 }
 
 void Game::print() const {
-    const matrix M = this->gate.getPipes();
+    const matrix PIPES = this->gate.getPipes();
     const pair<int, int> BIRD = this->gate.getBird();
 
     // Print sky
@@ -25,11 +25,10 @@ void Game::print() const {
     }
 
     // Print pipes
-    for (const auto &pipe : M) {
+    for (const auto &pipe : PIPES) {
         for (uint i = 1; i <= pipe.size(); ++i) {
-            const pair<int, bool> P = pipe[i];
-            if (P.s) {
-                this->grid.print(i, P.f, PIPE);
+            if (pipe[i].s) {
+                this->grid.print(i, pipe[i].f, PIPE_CH);
             }
         }
     }
@@ -65,9 +64,9 @@ void Game::quit() {
     getmaxyx(stdscr, yMax, xMax);
 
     const string MESSAGE = "GAME OVER";
-    const int X = MESSAGE.size() + 2;
+    const int SIZE = MESSAGE.size() + 2;
 
-    WINDOW *quitWin = newwin(3, X, (yMax - 3) / 2, (xMax - X) / 2);
+    WINDOW *quitWin = newwin(3, SIZE, (yMax - 3) / 2, (xMax - SIZE) / 2);
 
     nocbreak(); // Disables half-delay mode
     box(quitWin, 0, 0);

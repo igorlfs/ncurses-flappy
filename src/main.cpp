@@ -33,15 +33,15 @@ int main() {
     initialize();
 
     WINDOW *gameWindow = centralizeWindow();
-    Game g(gameWindow);
+    Game game(gameWindow);
 
     const int DELAY = 2;
     halfdelay(DELAY);
 
-    while (!g.isGameOver()) {
-        g.print();
-        g.readInput();
-        g.update();
+    while (!game.isGameOver()) {
+        game.print();
+        game.readInput();
+        game.update();
     }
 
     Game::quit();
