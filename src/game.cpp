@@ -40,11 +40,10 @@ void Game::print() const {
 }
 
 void Game::update() {
-    const int CEIL = 5;
-
-    if (Random::rng(0, CEIL) == 0) {
+    if (this->pipeGenerator % 4 == 0) {
         this->gate.spawnPipe();
     }
+    this->pipeGenerator++;
 
     if (this->jumped) {
         this->gate.jump();

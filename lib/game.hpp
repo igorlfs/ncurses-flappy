@@ -36,6 +36,7 @@ class Game {
   private:
     bool gameOver{false};
     bool jumped{false};
+    int pipeGenerator{0};
 
     Board grid;
     Logic gate;
