@@ -10,7 +10,11 @@ using std::string;
 class Game {
   public:
     /// Constructors
-    Game(WINDOW *win) : grid(win), gate(win->_maxx - 1, win->_maxy - 1) {}
+    Game(WINDOW *win) : grid(win), gate(win->_maxx - 1, win->_maxy - 1) {
+        init_pair(1, COLOR_RED, COLOR_YELLOW);
+        init_pair(2, COLOR_GREEN, COLOR_GREEN);
+        init_pair(3, -1, COLOR_CYAN);
+    }
 
     /// Getters
     bool isGameOver() const { return this->gameOver; }
@@ -40,6 +44,7 @@ class Game {
     static constexpr int QUIT{(int)'x'};
     static constexpr int ACTION{(int)' '};
     /// Printable chars
-    static constexpr int BIRD{(int)'*'};
-    static constexpr int PIPE{(int)'|'};
+    static constexpr chtype BIRD_CH = '*' | A_BOLD | COLOR_PAIR(1);
+    static constexpr int PIPE_CH = '$' | A_BOLD | COLOR_PAIR(2);
+    static constexpr int SKY_CH = ' ' | A_BOLD | COLOR_PAIR(3);
 };

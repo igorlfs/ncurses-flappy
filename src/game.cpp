@@ -15,11 +15,14 @@ void Game::readInput() {
 
 void Game::print() const {
     const matrix M = this->gate.getPipes();
-    const pair<int, int> B = this->gate.getBird();
+    const pair<int, int> BIRD = this->gate.getBird();
 
-    // Clear screen (probably stupid)
-    werase(this->grid.getWin());
-    box(this->grid.getWin(), 0, 0);
+    // Print sky
+    for (int i = 1; i <= this->grid.getX(); ++i) {
+        for (int j = 1; j <= this->grid.getY(); ++j) {
+            this->grid.print(j, i, SKY_CH);
+        }
+    }
 
     // Print pipes
     for (const auto &pipe : M) {
@@ -32,7 +35,7 @@ void Game::print() const {
     }
 
     // Print bird
-    this->grid.print(B.f, B.s, BIRD);
+    this->grid.print(BIRD.f, BIRD.s, BIRD_CH);
 
     wrefresh(this->grid.getWin());
 }
