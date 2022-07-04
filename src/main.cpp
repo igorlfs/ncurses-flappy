@@ -45,7 +45,5 @@ int main() {
     }
 
     Game::quit();
-
-    delwin(gameWindow);
     endwin();
 }

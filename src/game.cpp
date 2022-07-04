@@ -71,5 +71,8 @@ void Game::quit() {
     box(quitWin, 0, 0);
     mvwprintw(quitWin, 1, 1, "%s", MESSAGE.c_str());
     wgetch(quitWin);
+
+    curs_set(1); // Display cursor again
     delwin(quitWin);
+    delwin(this->grid_.GetWin());
 }
