@@ -57,18 +57,22 @@ void game::Flappy::Update() {
 }
 
 void game::Flappy::Quit() {
+    const int SCORE = this->gate_.GetScore();
+
     int yMax;
     int xMax;
     getmaxyx(stdscr, yMax, xMax);
 
     const string MESSAGE = "GAME OVER";
-    const int SIZE = static_cast<int>(MESSAGE.size()) + 2;
+    const int M_SIZE = static_cast<int>(MESSAGE.size()) + 2;
 
-    WINDOW *quitWin = newwin(3, SIZE, (yMax - 3) / 2, (xMax - SIZE) / 2);
+    // This only works because M_SIZE > lenght("SCORE: score_")
+    WINDOW *quitWin = newwin(4, M_SIZE, (yMax - 3) / 2, (xMax - M_SIZE) / 2);
 
     nocbreak(); // Disables half-delay mode
     box(quitWin, 0, 0);
     mvwprintw(quitWin, 1, 1, "%s", MESSAGE.c_str());
+    mvwprintw(quitWin, 2, 1, "SCORE: %d", SCORE);
     wgetch(quitWin);
 
     curs_set(1); // Display cursor again

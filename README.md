@@ -7,7 +7,6 @@
 ### TODO
 
 - [ ] Add tests
-- [ ] Score Tracker
 
 ## DEPS
 

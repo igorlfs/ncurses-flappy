@@ -41,12 +41,21 @@ bool logic::Logic::Move() {
     for (auto &pipe : this->pipes_) {
         for (uint i = 0; i < pipe.size(); ++i) {
             pipe[i].F--;
+
             if (pipe[i].F <= 0) {
                 shouldRemove = true;
             }
+
+            // Check if bird is passing through a pipe (including a hole)
             if (pipe[i].F == Logic::kBirdCol &&
-                static_cast<int>(i) == this->bird_.F && pipe[i].S) {
-                hasCollided = true;
+                static_cast<int>(i) == this->bird_.F) {
+
+                this->score_++;
+
+                // if it isn't a hole, a collision happened
+                if (pipe[i].S) {
+                    hasCollided = true;
+                }
             }
         }
     }

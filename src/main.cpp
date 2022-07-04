@@ -5,7 +5,6 @@ static constexpr int kWindowCols = 12;
 static constexpr int kWindowRows = 18;
 
 // TODO(igorlfs):
-// - Track Score (print when quitting)
 // - Tests
 
 void Initialize() {

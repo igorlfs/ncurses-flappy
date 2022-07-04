@@ -25,6 +25,7 @@ class Logic {
     /// Getters
     matrix GetPipes() const { return this->pipes_; }
     pair<int, int> GetBird() const { return this->bird_; }
+    int GetScore() const { return this->score_; }
 
     /// Operations
 
@@ -41,6 +42,7 @@ class Logic {
     static constexpr int kBirdCol{4};
     static constexpr int kJumpHeight{3};
 
+    int score_{-1};
     int lastCol_;
     int lastRow_;
 
