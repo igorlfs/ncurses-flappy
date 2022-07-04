@@ -1,12 +1,12 @@
 #include "board.hpp"
 
-Board::Board(WINDOW *win) : window(win), yMax(win->_maxy), xMax(win->_maxx) {
-    box(this->window, 0, 0);
-    wrefresh(this->window);
-    keypad(this->window, true);
-    leaveok(this->window, true);
+Board::Board(WINDOW *win) : window_(win), yMax_(win->_maxy), xMax_(win->_maxx) {
+    box(this->window_, 0, 0);
+    wrefresh(this->window_);
+    keypad(this->window_, true);
+    leaveok(this->window_, true);
 }
 
-void Board::print(const int &y, const int &x, const chtype &c) const {
-    mvwaddch(this->window, y, x, c);
+void Board::Print(const int &ver, const int &hor, const chtype &cha) const {
+    mvwaddch(this->window_, ver, hor, cha);
 }

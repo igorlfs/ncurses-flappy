@@ -5,22 +5,22 @@
 class Board {
   public:
     /// Constructors
-    Board(WINDOW *win);
+    explicit Board(WINDOW *win);
 
     /// Getters
-    int getX() const { return this->xMax - 1; }
-    int getY() const { return this->yMax - 1; }
-    int getSize() const { return (this->xMax - 1) * (this->yMax - 1); }
-    WINDOW *getWin() const { return this->window; }
+    int GetX() const { return this->xMax_ - 1; }
+    int GetY() const { return this->yMax_ - 1; }
+    int GetSize() const { return (this->xMax_ - 1) * (this->yMax_ - 1); }
+    WINDOW *GetWin() const { return this->window_; }
 
     /// Operations
-    /// @brief prints a chtype c to the board window in the position (y,x)
-    /// @param y, vertical coordinate
-    /// @param x, horizontal coordinate
-    /// @param c, desired chtype to print
-    void print(const int &y, const int &x, const chtype &c) const;
+    /// @brief prints a chtype cha to the board window in the position (ver,hor)
+    /// @param ver, vertical coordinate
+    /// @param hor, horizontal coordinate
+    /// @param cha, desired chtype to print
+    void Print(const int &ver, const int &hor, const chtype &cha) const;
 
   private:
-    WINDOW *window;
-    int yMax, xMax;
+    WINDOW *window_;
+    int yMax_, xMax_;
 };

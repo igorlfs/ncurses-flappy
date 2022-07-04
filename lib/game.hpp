@@ -5,47 +5,57 @@
 #include <ncurses.h>
 #include <string>
 
+namespace game {
+
 using std::string;
 
-class Game {
+#define F first
+#define S second
+
+class Flappy {
   public:
     /// Constructors
-    Game(WINDOW *win) : grid(win), gate(win->_maxx - 1, win->_maxy - 1) {
+    explicit Flappy(WINDOW *win)
+        : grid_(win), gate_({win->_maxx - 1, win->_maxy - 1}) {
         init_pair(1, COLOR_RED, COLOR_YELLOW);
         init_pair(2, COLOR_GREEN, COLOR_GREEN);
         init_pair(3, -1, COLOR_CYAN);
     }
 
     /// Getters
-    bool isGameOver() const { return this->gameOver; }
+
+    bool IsGameOver() const { return this->gameOver_; }
 
     /// Operations
 
     /// @brief reads user input
-    void readInput();
+    void ReadInput();
 
     /// @brief update game based on input
-    void update();
+    void Update();
 
     /// @brief print changes in memory to screen
-    void print() const;
+    void Print() const;
 
     /// @brief print a game over message and quit
-    static void quit();
+    void Quit();
 
   private:
-    bool gameOver{false};
-    bool jumped{false};
-    int pipeGenerator{0};
+    bool gameOver_{false};
+    bool jumped_{false};
+    int pipeGenerator_{0};
 
-    Board grid;
-    Logic gate;
+    Board grid_;
+    logic::Logic gate_;
 
     /// Actions
-    static constexpr int QUIT{(int)'x'};
-    static constexpr int ACTION{(int)' '};
+    static constexpr int kQuit{static_cast<int>('x')};
+    static constexpr int kAction{static_cast<int>(' ')};
+
     /// Printable chars
-    static constexpr chtype BIRD_CH = '*' | A_BOLD | COLOR_PAIR(1);
-    static constexpr int PIPE_CH = '$' | A_BOLD | COLOR_PAIR(2);
-    static constexpr int SKY_CH = ' ' | A_BOLD | COLOR_PAIR(3);
+    static constexpr chtype kBirdCh = '*' | A_BOLD | COLOR_PAIR(1);
+    static constexpr int kPipeCh = '$' | A_BOLD | COLOR_PAIR(2);
+    static constexpr int kSkyCh = ' ' | A_BOLD | COLOR_PAIR(3);
 };
+
+} // namespace game

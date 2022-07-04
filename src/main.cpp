@@ -1,14 +1,14 @@
 #include "game.hpp"
 #include "msgassert.hpp"
 
-static constexpr int WINDOW_COLS = 12;
-static constexpr int WINDOW_ROWS = 18;
+static constexpr int kWindowCols = 12;
+static constexpr int kWindowRows = 18;
 
-// TODO:
+// TODO(igorlfs):
 // - Track Score (print when quitting)
 // - Tests
 
-void initialize() {
+void Initialize() {
     initscr();
     cbreak();
     noecho();
@@ -19,31 +19,31 @@ void initialize() {
     use_default_colors();
 }
 
-WINDOW *centralizeWindow() {
+WINDOW *CentralizeWindow() {
     int yMax;
     int xMax;
 
     getmaxyx(stdscr, yMax, xMax);
 
-    return newwin(WINDOW_COLS, WINDOW_ROWS, (yMax - WINDOW_COLS) / 2,
-                  (xMax - WINDOW_ROWS) / 2);
+    return newwin(kWindowCols, kWindowRows, (yMax - kWindowCols) / 2,
+                  (xMax - kWindowRows) / 2);
 }
 
 int main() {
-    initialize();
+    Initialize();
 
-    WINDOW *gameWindow = centralizeWindow();
-    Game game(gameWindow);
+    WINDOW *gameWindow = CentralizeWindow();
+    game::Flappy game(gameWindow);
 
     const int DELAY = 2;
     halfdelay(DELAY);
 
-    while (!game.isGameOver()) {
-        game.print();
-        game.readInput();
-        game.update();
+    while (!game.IsGameOver()) {
+        game.Print();
+        game.ReadInput();
+        game.Update();
     }
 
-    Game::quit();
+    game.Quit();
     endwin();
 }

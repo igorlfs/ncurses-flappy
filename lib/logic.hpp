@@ -3,41 +3,49 @@
 #include <list>
 #include <vector>
 
+namespace logic {
+
 using std::list;
 using std::pair;
 using std::vector;
+
+#define F first
+#define S second
 
 using matrix = list<vector<pair<int, bool>>>;
 
 class Logic {
   public:
     /// Constructors
-    Logic(const int &_lastCol, const int &_lastRow)
-        : lastCol(_lastCol), lastRow(_lastRow) {
-        this->bird = {this->lastRow / 2, this->BIRD_COL};
+    explicit Logic(const pair<int, int> &last)
+        : lastCol_(last.F), lastRow_(last.S) {
+        this->bird_ = {this->lastRow_ / 2, Logic::kBirdCol};
     }
 
     /// Getters
-    matrix getPipes() const { return this->pipes; }
-    pair<int, int> getBird() const { return this->bird; }
+    matrix GetPipes() const { return this->pipes_; }
+    pair<int, int> GetBird() const { return this->bird_; }
 
     /// Operations
 
     /// @brief creates a new pipe and sent it to the last column
-    void spawnPipe();
+    void SpawnPipe();
 
     /// @brief handle jump movement
-    void jump();
+    void Jump();
 
     /// @brief moves pipes and make bird fall
-    bool move();
+    bool Move();
 
   private:
-    const int BIRD_COL{4};
-    const int JUMP_HEIGHT{3};
-    int lastCol;
-    int lastRow;
+    static constexpr int kBirdCol{4};
+    static constexpr int kJumpHeight{3};
 
-    matrix pipes;
-    pair<int, int> bird;
+    int lastCol_;
+    int lastRow_;
+
+    matrix pipes_;
+    pair<int, int> bird_;
 };
+
+} // namespace logic

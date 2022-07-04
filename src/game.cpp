@@ -1,69 +1,68 @@
 #include "game.hpp"
 #include "random.hpp"
 
-#define f first
-#define s second
+using std::pair;
 
-void Game::readInput() {
-    int userInputKey = wgetch(this->grid.getWin());
+void game::Flappy::ReadInput() {
+    int userInputKey = wgetch(this->grid_.GetWin());
 
     switch (userInputKey) {
-        case QUIT: this->gameOver = true; break;
-        case ACTION: this->jumped = true; break;
+        case kQuit: this->gameOver_ = true; break;
+        case kAction: this->jumped_ = true; break;
     }
 }
 
-void Game::print() const {
-    const matrix PIPES = this->gate.getPipes();
-    const pair<int, int> BIRD = this->gate.getBird();
+void game::Flappy::Print() const {
+    const logic::matrix PIPES = this->gate_.GetPipes();
+    const pair<int, int> BIRD = this->gate_.GetBird();
 
     // Print sky
-    for (int i = 1; i <= this->grid.getX(); ++i) {
-        for (int j = 1; j <= this->grid.getY(); ++j) {
-            this->grid.print(j, i, SKY_CH);
+    for (int i = 1; i <= this->grid_.GetX(); ++i) {
+        for (int j = 1; j <= this->grid_.GetY(); ++j) {
+            this->grid_.Print(j, i, kSkyCh);
         }
     }
 
     // Print pipes
     for (const auto &pipe : PIPES) {
         for (uint i = 1; i <= pipe.size(); ++i) {
-            if (pipe[i].s) {
-                this->grid.print(i, pipe[i].f, PIPE_CH);
+            if (pipe[i].S) {
+                this->grid_.Print(static_cast<int>(i), pipe[i].F, kPipeCh);
             }
         }
     }
 
     // Print bird
-    this->grid.print(BIRD.f, BIRD.s, BIRD_CH);
+    this->grid_.Print(BIRD.F, BIRD.S, kBirdCh);
 
-    wrefresh(this->grid.getWin());
+    wrefresh(this->grid_.GetWin());
 }
 
-void Game::update() {
-    if (this->pipeGenerator % 4 == 0) {
-        this->gate.spawnPipe();
+void game::Flappy::Update() {
+    if (this->pipeGenerator_ % 4 == 0) {
+        this->gate_.SpawnPipe();
     }
-    this->pipeGenerator++;
+    this->pipeGenerator_++;
 
-    if (this->jumped) {
-        this->gate.jump();
-        this->jumped = false; // Reset movement
+    if (this->jumped_) {
+        this->gate_.Jump();
+        this->jumped_ = false; // Reset movement
     }
 
-    bool success = this->gate.move();
+    bool success = this->gate_.Move();
 
     if (!success) {
-        this->gameOver = true;
+        this->gameOver_ = true;
     }
 }
 
-void Game::quit() {
+void game::Flappy::Quit() {
     int yMax;
     int xMax;
     getmaxyx(stdscr, yMax, xMax);
 
     const string MESSAGE = "GAME OVER";
-    const int SIZE = MESSAGE.size() + 2;
+    const int SIZE = static_cast<int>(MESSAGE.size()) + 2;
 
     WINDOW *quitWin = newwin(3, SIZE, (yMax - 3) / 2, (xMax - SIZE) / 2);
 
