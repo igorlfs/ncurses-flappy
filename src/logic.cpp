@@ -50,11 +50,12 @@ bool logic::Logic::Move() {
             if (pipe[i].F == Logic::kBirdCol &&
                 static_cast<int>(i) == this->bird_.F) {
 
-                this->score_++;
-
                 // if it isn't a hole, a collision happened
+                // otherwise should increase score
                 if (pipe[i].S) {
                     hasCollided = true;
+                } else {
+                    this->score_++;
                 }
             }
         }
@@ -77,7 +78,7 @@ void logic::Logic::Jump() {
 }
 
 void logic::Logic::Reset() {
-    this->score_ = -1;
+    this->score_ = 0;
     this->bird_ = {this->lastRow_ / 2, Logic::kBirdCol};
     this->pipes_.clear();
 }

@@ -45,7 +45,7 @@ class Logic {
     static constexpr int kBirdCol{4};
     static constexpr int kJumpHeight{3};
 
-    int score_{-1};
+    int score_{0};
     int lastCol_;
     int lastRow_;
 
