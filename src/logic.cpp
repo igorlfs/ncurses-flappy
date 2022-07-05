@@ -75,3 +75,9 @@ void logic::Logic::Jump() {
         this->bird_.F = this->bird_.F - kJumpHeight;
     }
 }
+
+void logic::Logic::Reset() {
+    this->score_ = -1;
+    this->bird_ = {this->lastRow_ / 2, Logic::kBirdCol};
+    this->pipes_.clear();
+}

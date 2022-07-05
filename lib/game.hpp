@@ -38,7 +38,11 @@ class Flappy {
     void Print() const;
 
     /// @brief print a game over message and quit
-    void Quit();
+    /// @return true if the game should continue
+    bool Quit();
+
+    /// @brief reset game state so a new run can be started
+    void Reset();
 
   private:
     bool gameOver_{false};
@@ -51,6 +55,7 @@ class Flappy {
     /// Actions
     static constexpr int kQuit{static_cast<int>('x')};
     static constexpr int kAction{static_cast<int>(' ')};
+    static constexpr int kReset{static_cast<int>('r')};
 
     /// Printable chars
     static constexpr chtype kBirdCh = '*' | A_BOLD | COLOR_PAIR(1);

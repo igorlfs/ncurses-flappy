@@ -38,6 +38,9 @@ class Logic {
     /// @brief moves pipes and make bird fall
     bool Move();
 
+    /// @brief reset game state
+    void Reset();
+
   private:
     static constexpr int kBirdCol{4};
     static constexpr int kJumpHeight{3};

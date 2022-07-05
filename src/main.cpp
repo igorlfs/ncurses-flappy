@@ -34,8 +34,10 @@ int main() {
     WINDOW *gameWindow = CentralizeWindow();
     game::Flappy game(gameWindow);
 
-    const int DELAY = 2;
-    halfdelay(DELAY);
+    const int DELAY = 200;
+    wtimeout(gameWindow, DELAY);
+
+reset:
 
     while (!game.IsGameOver()) {
         game.Print();
@@ -43,6 +45,10 @@ int main() {
         game.Update();
     }
 
-    game.Quit();
+    if (!game.Quit()) {
+        goto reset;
+    }
+
+    delwin(gameWindow);
     endwin();
 }
