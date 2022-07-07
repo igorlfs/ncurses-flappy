@@ -13,7 +13,7 @@ void logic::Logic::SpawnPipe() {
     vector<pair<int, bool>> pipe;
 
     for (int i = 0; i <= this->lastRow_; ++i) {
-        if (i < PIPE_START + HOLE_SIZE && i > PIPE_START) {
+        if (i < PIPE_START + HOLE_SIZE && i >= PIPE_START) {
             // Empty
             pipe.emplace_back(this->lastCol_, false);
         } else {
@@ -26,7 +26,6 @@ void logic::Logic::SpawnPipe() {
 }
 
 bool logic::Logic::Move() {
-    bool shouldRemove = false;
     bool hasCollided = false;
 
     // Try making the bird fall
@@ -41,10 +40,6 @@ bool logic::Logic::Move() {
     for (auto &pipe : this->pipes_) {
         for (uint i = 0; i < pipe.size(); ++i) {
             pipe[i].F--;
-
-            if (pipe[i].F <= 0) {
-                shouldRemove = true;
-            }
 
             // Check if bird is passing through a pipe (including a hole)
             if (pipe[i].F == Logic::kBirdCol &&
@@ -62,7 +57,7 @@ bool logic::Logic::Move() {
     }
 
     // Remove front pipe if necessary
-    if (shouldRemove) {
+    if (this->pipes_.front()[0].F <= 0) {
         this->pipes_.pop_front();
     }
 
