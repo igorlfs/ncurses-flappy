@@ -2,7 +2,6 @@
 
 #include "board.hpp"
 #include "logic.hpp"
-#include <ncurses.h>
 #include <string>
 
 namespace game {

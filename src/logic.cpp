@@ -1,7 +1,5 @@
 #include "logic.hpp"
 #include "random.hpp"
-#include <array>
-#include <curses.h>
 
 void logic::Logic::SpawnPipe() {
     // Generate random position
