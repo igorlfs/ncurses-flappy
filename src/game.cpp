@@ -26,9 +26,10 @@ void game::Flappy::Print() const {
 
     // Print pipes
     for (const auto &pipe : PIPES) {
-        for (uint i = 1; i <= pipe.size(); ++i) {
+        for (uint i = 0; i < pipe.size(); ++i) {
             if (pipe[i].S) {
-                this->grid_.Print(static_cast<int>(i), pipe[i].F, kPipeCh);
+                this->grid_.Print(static_cast<int>(i + 1), pipe.at(i).F,
+                                  kPipeCh);
             }
         }
     }

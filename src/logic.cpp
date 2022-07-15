@@ -10,7 +10,7 @@ void logic::Logic::SpawnPipe() {
 
     vector<pair<int, bool>> pipe;
 
-    for (int i = 0; i <= this->lastRow_; ++i) {
+    for (int i = 0; i < this->lastRow_; ++i) {
         if (i < PIPE_START + HOLE_SIZE && i >= PIPE_START) {
             // Empty
             pipe.emplace_back(this->lastCol_, false);
@@ -41,7 +41,7 @@ bool logic::Logic::Move() {
 
             // Check if bird is passing through a pipe (including a hole)
             if (pipe[i].F == Logic::kBirdCol &&
-                static_cast<int>(i) == this->bird_.F) {
+                static_cast<int>(i + 1) == this->bird_.F) {
 
                 // if it isn't a hole, a collision happened
                 // otherwise should increase score
