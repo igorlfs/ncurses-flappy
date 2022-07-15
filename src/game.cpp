@@ -14,7 +14,7 @@ void game::Flappy::ReadInput() {
 }
 
 void game::Flappy::Print() const {
-    const logic::matrix PIPES = this->gate_.GetPipes();
+    const auto PIPES = this->gate_.GetPipes();
     const pair<int, int> BIRD = this->gate_.GetBird();
 
     // Print sky
@@ -26,10 +26,9 @@ void game::Flappy::Print() const {
 
     // Print pipes
     for (const auto &pipe : PIPES) {
-        for (uint i = 0; i < pipe.size(); ++i) {
-            if (pipe[i].S) {
-                this->grid_.Print(static_cast<int>(i + 1), pipe.at(i).F,
-                                  kPipeCh);
+        for (uint i = 0; i < pipe.S.size(); ++i) {
+            if (pipe.S[i]) {
+                this->grid_.Print(static_cast<int>(i + 1), pipe.F, kPipeCh);
             }
         }
     }

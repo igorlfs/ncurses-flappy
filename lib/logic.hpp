@@ -12,19 +12,19 @@ using std::vector;
 #define F first
 #define S second
 
-using matrix = list<vector<pair<int, bool>>>;
-
 class Logic {
   public:
     /// Constructors
     explicit Logic(const pair<int, int> &last)
         : lastCol_(last.F), lastRow_(last.S) {
-        this->bird_ = {this->lastRow_ / 2, Logic::kBirdCol};
+        this->birdHeight_ = this->lastRow_ / 2;
     }
 
     /// Getters
-    matrix GetPipes() const { return this->pipes_; }
-    pair<int, int> GetBird() const { return this->bird_; }
+    auto GetPipes() const { return this->pipes_; }
+    pair<int, int> GetBird() const {
+        return {this->birdHeight_, Logic::kBirdCol};
+    }
     int GetScore() const { return this->score_; }
 
     /// Operations
@@ -49,8 +49,8 @@ class Logic {
     int lastCol_;
     int lastRow_;
 
-    matrix pipes_;
-    pair<int, int> bird_;
+    list<pair<int, vector<bool>>> pipes_;
+    int birdHeight_;
 };
 
 } // namespace logic

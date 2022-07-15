@@ -8,15 +8,16 @@ void logic::Logic::SpawnPipe() {
     const int HOLE_SIZE = Random::rng(MIN_SIZE, MAX_SIZE);
     const int PIPE_START = Random::rng(1, this->lastRow_ - HOLE_SIZE);
 
-    vector<pair<int, bool>> pipe;
+    pair<int, vector<bool>> pipe;
+    pipe.first = this->lastCol_;
 
     for (int i = 0; i < this->lastRow_; ++i) {
         if (i < PIPE_START + HOLE_SIZE && i >= PIPE_START) {
             // Empty
-            pipe.emplace_back(this->lastCol_, false);
+            pipe.second.push_back(false);
         } else {
             // Filled
-            pipe.emplace_back(this->lastCol_, true);
+            pipe.second.push_back(true);
         }
     }
 
@@ -28,34 +29,30 @@ bool logic::Logic::Move() {
 
     // Try making the bird fall
     // Hitting the ground should kill the bird
-    if (this->bird_.F + 1 > this->lastRow_) {
+    if (this->birdHeight_ + 1 > this->lastRow_) {
         return false;
     }
 
-    this->bird_.F++;
+    this->birdHeight_++;
 
     // Moves the pipes and check for a collision
     for (auto &pipe : this->pipes_) {
-        for (uint i = 0; i < pipe.size(); ++i) {
-            pipe[i].F--;
+        pipe.F--;
 
-            // Check if bird is passing through a pipe (including a hole)
-            if (pipe[i].F == Logic::kBirdCol &&
-                static_cast<int>(i + 1) == this->bird_.F) {
-
-                // if it isn't a hole, a collision happened
-                // otherwise should increase score
-                if (pipe[i].S) {
-                    hasCollided = true;
-                } else {
-                    this->score_++;
-                }
+        // Check if bird is passing through a pipe
+        if (pipe.F == Logic::kBirdCol) {
+            // if it isn't a hole, a collision happened
+            // otherwise should increase score
+            if (pipe.S[this->birdHeight_ - 1]) {
+                hasCollided = true;
+            } else {
+                this->score_++;
             }
         }
     }
 
     // Remove front pipe if necessary
-    if (this->pipes_.front()[0].F <= 0) {
+    if (this->pipes_.front().F <= 0) {
         this->pipes_.pop_front();
     }
 
@@ -63,15 +60,15 @@ bool logic::Logic::Move() {
 }
 
 void logic::Logic::Jump() {
-    if (this->bird_.F - kJumpHeight < 0) {
-        this->bird_.F = 0;
+    if (this->birdHeight_ - kJumpHeight < 0) {
+        this->birdHeight_ = 0;
     } else {
-        this->bird_.F = this->bird_.F - kJumpHeight;
+        this->birdHeight_ = this->birdHeight_ - kJumpHeight;
     }
 }
 
 void logic::Logic::Reset() {
     this->score_ = 0;
-    this->bird_ = {this->lastRow_ / 2, Logic::kBirdCol};
+    this->birdHeight_ = this->lastRow_ / 2;
     this->pipes_.clear();
 }
