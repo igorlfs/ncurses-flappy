@@ -95,11 +95,11 @@ void game::Flappy::UpdatesColors() {
     this->colors_ = !this->colors_;
     if (this->colors_) {
         birdChar_ = '*' | A_BOLD | COLOR_PAIR(1);
-        pipeChar_ = '$' | A_BOLD | COLOR_PAIR(2);
+        pipeChar_ = ' ' | A_BOLD | COLOR_PAIR(2);
         skyChar_ = ' ' | A_BOLD | COLOR_PAIR(3);
     } else {
-        birdChar_ = '*' | A_BOLD | COLOR_PAIR(4);
-        pipeChar_ = '$' | A_BOLD | COLOR_PAIR(5);
+        birdChar_ = 'o' | A_BOLD | COLOR_PAIR(4);
+        pipeChar_ = ' ' | A_BOLD | COLOR_PAIR(5);
         skyChar_ = ' ' | A_BOLD | COLOR_PAIR(6);
     }
 }

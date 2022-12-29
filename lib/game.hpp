@@ -21,7 +21,7 @@ class Flappy {
         init_pair(2, COLOR_GREEN, COLOR_GREEN);
         init_pair(3, -1, COLOR_CYAN);
         // avoid clangd's [readability-magic-numbers]
-        init_pair(3 + 1, COLOR_RED, COLOR_MAGENTA);
+        init_pair(3 + 1, COLOR_YELLOW, COLOR_MAGENTA);
         init_pair(3 + 2, COLOR_RED, COLOR_RED);
         init_pair(3 + 3, -1, COLOR_BLACK);
         UpdatesColors();
