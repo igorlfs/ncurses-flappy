@@ -68,7 +68,7 @@ bool game::Flappy::Quit() {
     const string MESSAGE = "GAME OVER";
     const int M_SIZE = static_cast<int>(MESSAGE.size()) + 2;
 
-    // This only works because M_SIZE > lenght("SCORE: score_")
+    // This only works because M_SIZE > length("SCORE: score_")
     WINDOW *quitWin = newwin(4, M_SIZE, (yMax - 3) / 2, (xMax - M_SIZE) / 2);
 
     box(quitWin, 0, 0);
@@ -76,9 +76,13 @@ bool game::Flappy::Quit() {
     mvwprintw(quitWin, 2, 1, "SCORE: %d", SCORE);
     wrefresh(quitWin);
 
+retry:
     int input = getch();
     if (input == kReset) {
         Reset();
+    } else if (input == kAction) {
+        // Prevents the player from accidentally quitting
+        goto retry;
     }
 
     delwin(quitWin);
