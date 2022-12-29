@@ -18,9 +18,9 @@ void game::Flappy::Print() const {
     const pair<int, int> BIRD = this->gate_.GetBird();
 
     // Print sky
-    for (int i = 1; i <= this->grid_.GetX(); ++i) {
-        for (int j = 1; j <= this->grid_.GetY(); ++j) {
-            this->grid_.Print(j, i, kSkyCh);
+    for (uint i = 1; i <= this->grid_.GetX(); ++i) {
+        for (uint j = 1; j <= this->grid_.GetY(); ++j) {
+            this->grid_.Print(j, i, skyChar_);
         }
     }
 
@@ -28,7 +28,7 @@ void game::Flappy::Print() const {
     for (const auto &pipe : PIPES) {
         for (uint i = 0; i < pipe.S.size(); ++i) {
             if (pipe.S[i]) {
-                this->grid_.Print(static_cast<int>(i + 1), pipe.F, kPipeCh);
+                this->grid_.Print(i + 1, pipe.F, pipeChar_);
             }
         }
     }

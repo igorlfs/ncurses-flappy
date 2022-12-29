@@ -7,6 +7,7 @@ Board::Board(WINDOW *win) : window_(win), yMax_(win->_maxy), xMax_(win->_maxx) {
     leaveok(this->window_, true);
 }
 
-void Board::Print(const int &ver, const int &hor, const chtype &cha) const {
+void Board::Print(const unsigned &ver, const unsigned &hor,
+                  const chtype &cha) const {
     mvwaddch(this->window_, ver, hor, cha);
 }

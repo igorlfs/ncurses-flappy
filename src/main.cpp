@@ -36,7 +36,6 @@ int main() {
 
     const int DELAY = 200;
     wtimeout(gameWindow, DELAY);
-
 reset:
 
     while (!game.IsGameOver()) {

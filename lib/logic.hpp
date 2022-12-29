@@ -47,10 +47,10 @@ class Logic {
 
     int score_{0};
     int lastCol_;
-    int lastRow_;
+    unsigned long lastRow_;
 
     list<pair<int, vector<bool>>> pipes_;
-    int birdHeight_;
+    unsigned long birdHeight_;
 };
 
 } // namespace logic

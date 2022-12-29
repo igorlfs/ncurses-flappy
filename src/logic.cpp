@@ -5,13 +5,13 @@ void logic::Logic::SpawnPipe() {
     // Generate random position
     const int MIN_SIZE = 3;
     const int MAX_SIZE = 5;
-    const int HOLE_SIZE = Random::rng(MIN_SIZE, MAX_SIZE);
-    const int PIPE_START = Random::rng(1, this->lastRow_ - HOLE_SIZE);
+    const ulong HOLE_SIZE = Random::Rng(MIN_SIZE, MAX_SIZE);
+    const ulong PIPE_START = Random::Rng(1, this->lastRow_ - HOLE_SIZE);
 
     pair<int, vector<bool>> pipe;
     pipe.first = this->lastCol_;
 
-    for (int i = 0; i < this->lastRow_; ++i) {
+    for (ulong i = 0; i < this->lastRow_; ++i) {
         if (i < PIPE_START + HOLE_SIZE && i >= PIPE_START) {
             // Empty
             pipe.second.push_back(false);

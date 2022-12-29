@@ -6,8 +6,8 @@ LIB_DIR = lib
 # Compiler
 CXX = clang++
 
-# Flags: Compile, more warnings, use C++17, enable debugging symbols and include path
-CXXFLAGS = -c -Wall -Wextra -Wshadow -Wpedantic -std=c++17 -g -fstandalone-debug -I$(LIB_DIR)
+# Flags: Compile, more warnings, use C++20, enable debugging symbols and include path
+CXXFLAGS = -c -Wall -Wextra -Wshadow -Wpedantic -std=c++20 -g -fstandalone-debug -I$(LIB_DIR)
 LNFLAGS = -lncurses
 
 # Binaries
