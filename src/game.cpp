@@ -9,6 +9,7 @@ void game::Flappy::ReadInput() {
     switch (userInputKey) {
         case kQuit: this->gameOver_ = true; break;
         case kAction: this->jumped_ = true; break;
+        case kToggleColors: UpdatesColors(); break;
         case kReset: Reset(); break;
     }
 }
@@ -34,7 +35,7 @@ void game::Flappy::Print() const {
     }
 
     // Print bird
-    this->grid_.Print(BIRD.F, BIRD.S, kBirdCh);
+    this->grid_.Print(BIRD.F, BIRD.S, birdChar_);
 
     wrefresh(this->grid_.GetWin());
 }
@@ -89,3 +90,16 @@ void game::Flappy::Reset() {
     this->gameOver_ = false;
     this->gate_.Reset();
 };
+
+void game::Flappy::UpdatesColors() {
+    this->colors_ = !this->colors_;
+    if (this->colors_) {
+        birdChar_ = '*' | A_BOLD | COLOR_PAIR(1);
+        pipeChar_ = '$' | A_BOLD | COLOR_PAIR(2);
+        skyChar_ = ' ' | A_BOLD | COLOR_PAIR(3);
+    } else {
+        birdChar_ = '*' | A_BOLD | COLOR_PAIR(4);
+        pipeChar_ = '$' | A_BOLD | COLOR_PAIR(5);
+        skyChar_ = ' ' | A_BOLD | COLOR_PAIR(6);
+    }
+}

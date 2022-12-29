@@ -2,6 +2,7 @@
 
 #include "board.hpp"
 #include "logic.hpp"
+#include <curses.h>
 #include <string>
 
 namespace game {
@@ -19,6 +20,11 @@ class Flappy {
         init_pair(1, COLOR_RED, COLOR_YELLOW);
         init_pair(2, COLOR_GREEN, COLOR_GREEN);
         init_pair(3, -1, COLOR_CYAN);
+        // avoid clangd's [readability-magic-numbers]
+        init_pair(3 + 1, COLOR_RED, COLOR_MAGENTA);
+        init_pair(3 + 2, COLOR_RED, COLOR_RED);
+        init_pair(3 + 3, -1, COLOR_BLACK);
+        UpdatesColors();
     }
 
     /// Getters
@@ -43,9 +49,13 @@ class Flappy {
     /// @brief reset game state so a new run can be started
     void Reset();
 
+    /// @brief (easter egg) updates colors
+    void UpdatesColors();
+
   private:
     bool gameOver_{false};
     bool jumped_{false};
+    bool colors_{false};
     int pipeGenerator_{0};
 
     Board grid_;
@@ -55,11 +65,12 @@ class Flappy {
     static constexpr int kQuit{static_cast<int>('x')};
     static constexpr int kAction{static_cast<int>(' ')};
     static constexpr int kReset{static_cast<int>('r')};
+    static constexpr int kToggleColors{static_cast<int>('t')};
 
     /// Printable chars
-    static constexpr chtype kBirdCh = '*' | A_BOLD | COLOR_PAIR(1);
-    static constexpr int kPipeCh = '$' | A_BOLD | COLOR_PAIR(2);
-    static constexpr int kSkyCh = ' ' | A_BOLD | COLOR_PAIR(3);
+    chtype skyChar_;
+    chtype birdChar_;
+    chtype pipeChar_;
 };
 
 } // namespace game
